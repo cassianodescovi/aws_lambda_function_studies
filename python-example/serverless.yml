@@ -23,19 +23,22 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.8
+  timeout: 2
+  memorySize: 512
 
 # you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
+  stage: dev
+  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
-#  iam:
-#    role:
-#      statements:
-#        - Effect: "Allow"
-#          Action:
-#            - "s3:ListBucket"
-#          Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "lambda:*"
+          Resource:
+            - "*"
 #        - Effect: "Allow"
 #          Action:
 #            - "s3:PutObject"
@@ -59,8 +62,9 @@ provider:
 #    - include-me-dir/**
 
 functions:
-  hello:
+  hello-short-iam-test:
     handler: handler.hello
+
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
